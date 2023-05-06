@@ -17,3 +17,6 @@
 |||
 |||
 |||
+Start-BitsTransfer
+$client = new-object System.Net.WebClient
+$client.DownloadFile('https://xxxxxxxx.xxx','D:\xxxxx/xxxx.xxx')
