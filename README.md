@@ -17,6 +17,14 @@
 |||
 |||
 |||
+
+Enable-NetFirewallRule -DisplayGroup "Windows Remote Management"
+
+Enable-PSRemoting -Force
+
+New-NetFirewallRule -DisplayName "Remote Management" -Direction Inbound -Action Allow -Protocol TCP -LocalPort 5985
+
+
 Start-BitsTransfer
 $client = new-object System.Net.WebClient
 $client.DownloadFile('https://xxxxxxxx.xxx','D:\xxxxx/xxxx.xxx')
