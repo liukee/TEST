@@ -14,6 +14,6 @@
 |SET DEF DNFS:[SERVER]|跳转到服务器名为server的目录|
 |DELETE|删除|
 |DIR|显示目录|
-|||
+|Create/dir [.newdir]  在当前目录创建一个目录||
 |||
 |||
