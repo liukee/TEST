@@ -17,35 +17,18 @@
 |Create/dir [.newdir]  在当前目录创建一个目录||
 |||
 |||
-VBA可以使用cmd命令下载文件，但是使用net use命令下载文件并不是最好的选择。通常，我们使用VBA的内置函数和对象来下载文件，例如使用XMLHTTP对象和FileSystemObject对象。
+以下是使用cmd命令下载文件的示例代码：
 
-以下是一个使用XMLHTTP对象下载文件的示例代码：
-
-Sub DownloadFile(url As String, destination As String)
-    Dim http As Object
-    Set http = CreateObject("MSXML2.XMLHTTP")
-    http.Open "GET", url, False
-    http.send
-    If http.Status = 200 Then
-        Dim stream As Object
-        Set stream = CreateObject("ADODB.Stream")
-        stream.Open
-        stream.Type = 1
-        stream.Write http.responseBody
-        stream.SaveToFile destination, 2
-        stream.Close
-    End If
+Sub DownloadFile(url As String, destination As String, username As String, password As String)
+    Dim cmd As String
+    cmd = "net use \\server\share " & password & " /user:" & username
+    Shell cmd, vbHide
+    cmd = "copy \\server\share\file.txt " & destination
+    Shell cmd, vbHide
 End Sub
-这个代码片段定义了一个名为DownloadFile的子过程，它接受两个参数：要下载的文件的URL和要保存的本地文件路径。该过程使用XMLHTTP对象打开URL并下载文件，然后使用FileSystemObject对象将文件保存到本地计算机。
+这个代码片段定义了一个名为DownloadFile的子过程，它接受四个参数：要下载的文件的URL、要保存的本地文件路径、用户名和密码。该过程使用net use命令连接到共享文件夹，并使用copy命令将文件复制到本地计算机。
 
 要调用这个过程，可以使用以下代码：
 
-DownloadFile "http://example.com/file.txt", "C:\Downloads\file.txt"
-这将下载名为file.txt的文件并将其保存到C:\Downloads\文件夹中
-
-        stream.Type = 1
-        stream.Write http.responseBody
-        stream.SaveToFile destination, 2
-        stream.Close
-    End If
-End Sub
+DownloadFile "\\server\share\file.txt", "C:\Downloads\file.txt", "username", "password"
+这将下载名为file.txt的文件并将其保存到C:\Downloads\文件夹中。请注意，这种方法需要在本地计算机上设置共享文件夹，并且需要提供正确的用户名和密码进行身份验证
