@@ -32,3 +32,40 @@ End Sub
 
 DownloadFile "\\server\share\file.txt", "C:\Downloads\file.txt", "username", "password"
 这将下载名为file.txt的文件并将其保存到C:\Downloads\文件夹中。请注意，这种方法需要在本地计算机上设置共享文件夹，并且需要提供正确的用户名和密码进行身份验证
+
+
+Sub FTPConnect()
+
+    Dim FTP As Object
+    Set FTP = CreateObject("InetCtls.Inet")
+
+    ' 设置FTP服务器地址和端口号
+    FTP.RemoteHost = "ftp.example.com"
+    FTP.RemotePort = 21
+
+    ' 设置FTP用户名和密码
+    FTP.UserName = "ftp_username"
+    FTP.Password = "ftp_password"
+
+    ' 连接FTP服务器
+    FTP.Execute "OPEN " & FTP.RemoteHost & " " & FTP.RemotePort
+
+    ' 登录FTP服务器
+    FTP.Execute "USER " & FTP.UserName & " " & FTP.Password
+
+    ' 切换到FTP服务器上的目录
+    FTP.Execute "CD /ftp_directory"
+
+    ' 下载FTP服务器上的文件
+    FTP.Execute "GET ftp_filename local_filename"
+
+    ' 上传文件到FTP服务器
+    FTP.Execute "PUT local_filename ftp_filename"
+
+    ' 关闭FTP连接
+    FTP.Execute "CLOSE"
+    Set FTP = Nothing
+
+End Sub
+
+以上代码使用CreateObject函数创建了一个InetCtls.Inet对象，该对象提供了FTP连接的功能。通过设置RemoteHost、RemotePort、UserName和Password属性，可以指定FTP服务器的地址、端口号、用户名和密码。使用Execute方法执行FTP命令，如OPEN、USER、CD、GET和PUT等，来连接FTP服务器、登录FTP服务器、切换目录、下载文件和上传文件。最后使用CLOSE命令关闭FTP连接。
