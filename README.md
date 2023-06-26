@@ -13,6 +13,7 @@
 |IPMENU|菜单|
 |SET DEF DNFS:[SERVER]|跳转到服务器名为server的目录|
 |DELETE|删除|
+｜SET DEF..｜返回上层目录｜
 |DIR|显示目录|
 |Create/dir [.newdir]  在当前目录创建一个目录||
 |||
@@ -69,3 +70,7 @@ Sub FTPConnect()
 End Sub
 
 以上代码使用CreateObject函数创建了一个InetCtls.Inet对象，该对象提供了FTP连接的功能。通过设置RemoteHost、RemotePort、UserName和Password属性，可以指定FTP服务器的地址、端口号、用户名和密码。使用Execute方法执行FTP命令，如OPEN、USER、CD、GET和PUT等，来连接FTP服务器、登录FTP服务器、切换目录、下载文件和上传文件。最后使用CLOSE命令关闭FTP连接。
+
+$ SHOW PROCESS/FULL | SEARCH SYS$INPUT "FTP$PASSWORD"
+
+SYS$SYSTEM:FTP$PASSWORD.DAT
