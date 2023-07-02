@@ -34,7 +34,7 @@ End Sub
 DownloadFile "\\server\share\file.txt", "C:\Downloads\file.txt", "username", "password"
 这将下载名为file.txt的文件并将其保存到C:\Downloads\文件夹中。请注意，这种方法需要在本地计算机上设置共享文件夹，并且需要提供正确的用户名和密码进行身份验证
 
-
+//创建FTP连接
 Sub FTPConnect()
 
     Dim FTP As Object
@@ -71,6 +71,25 @@ End Sub
 
 以上代码使用CreateObject函数创建了一个InetCtls.Inet对象，该对象提供了FTP连接的功能。通过设置RemoteHost、RemotePort、UserName和Password属性，可以指定FTP服务器的地址、端口号、用户名和密码。使用Execute方法执行FTP命令，如OPEN、USER、CD、GET和PUT等，来连接FTP服务器、登录FTP服务器、切换目录、下载文件和上传文件。最后使用CLOSE命令关闭FTP连接。
 
-$ SHOW PROCESS/FULL | SEARCH SYS$INPUT "FTP$PASSWORD"
+//扫描枪
+Private Sub TextBox1_TextChanged()
+    ' 假设 TextBox1 是扫码枪输入的文本框对象
+    ' 在此处编写确认事件的代码
+    ' 例如，当输入的文本达到一定长度时触发确认事件
+    If Len(TextBox1.Value) = 10 Then
+        ' 执行确认事件的代码
+        MsgBox "确认事件已触发！"
+    End If
+End Sub
 
-SYS$SYSTEM:FTP$PASSWORD.DAT
+//循环遍历listbox
+Dim i As Integer
+Dim listBoxItem As Variant
+
+For i = 0 To ListBox1.ListCount - 1
+    listBoxItem = ListBox1.List(i)
+    ' 在这里处理每个项目的内容
+    ' 例如，将每个项目的内容打印到Immediate窗口
+    Debug.Print listBoxItem
+Next i
+
